@@ -1,0 +1,17 @@
+#*/datasets/
+*bb_preds/
+*processed/
+*raw_cityscapes/
+*lidc_crops_test/
+*lidc_crops_train/
+*lidc_crops_val/
+*/output
+*/wandb/
+*/wandb
+
+# python cache stuff etc.
+__pycache__/
+.idea
+
+# job files
+*.sh
