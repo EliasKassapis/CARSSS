@@ -1,0 +1,12 @@
+*/datasets/
+*/Meeting_stuff
+*/output
+*/wandb/
+*/wandb
+
+# python cache stuff etc.
+__pycache__/
+.idea
+
+# job files
+*.sh
