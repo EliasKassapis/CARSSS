@@ -59,11 +59,12 @@ def main(args):
 
     if args.mode == "test":
 
-        dataloader_test = load_data(args.dataset, "val" if args.dataset == "CITYSCAPES19" else "test", args.batch_size_plotting, args)
+        dataloader_test = load_data(args.dataset, "val" if args.dataset == "CITYSCAPES19" else "test", args.batch_size_plotting, args) # CS results are reported on the val set
 
     else:
         dataloader_train = load_data(args.dataset, "train", args.batch_size, args)
-        dataloader_validate = load_data(args.dataset, "val", args.batch_size_plotting, args)
+        dataloader_validate = load_data(args.dataset, "test" if args.dataset == "CITYSCAPES19" else "val", args.batch_size_plotting, args)
+        # we move the cities of  Darmstadt, Mönchengladbach and Ulm from the training set to the test set to be used as a validation (as done in the Probabilisti UNet paper)
 
     calibration_net = find_model(GEN_DIR, args.calibration_net,
                                  device=DEVICE,
@@ -256,8 +257,8 @@ def parse():
     # Data arguments -------------------------------------------------------------------------------------------------------------------
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE, help='Size of batches loaded by the data loader.')
     parser.add_argument('--batch-size-plotting', type=int, default=5, help='Size of validation batch')
-    parser.add_argument('--dataset', type=str, default='LIDC', help='LIDC, CITYSCAPES19 or CITYSCAPES35')
-    parser.add_argument('--class_flip', type=bool, default=False, help="Specifies whether to randomly flip classes in CITYSCAPES")
+    parser.add_argument('--dataset', type=str, default='CITYSCAPES19', help='LIDC, CITYSCAPES19 or CITYSCAPES35')
+    parser.add_argument('--class_flip', type=bool, default=True, help="Specifies whether to randomly flip classes in CITYSCAPES")
     parser.add_argument('--flip_experiment', type = str, default = 'DEEP', help = "ROAD or DEEP") # flip only road or 5 classes flipped in the ProbabilistcUNet paper
     parser.add_argument('--crop', type=bool, default=True, help='Specifies whether to randomly crop dataset image or not')
     parser.add_argument('--resize', type=bool, default=True, help='Specifies whether to resize dataset image size or not')

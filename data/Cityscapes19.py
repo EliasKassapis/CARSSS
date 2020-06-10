@@ -19,14 +19,14 @@ class Cityscapes19(Dataset):
 
             self.mode = mode
 
-            data_path = personal_constants.CITYSCAPES_PATH / "processed" / "quarter" / mode.lower()
+            data_path = personal_constants.CITYSCAPES_PATH / "processed" / mode.lower()
 
             assert mode in ["train", "test",
                             "val"], 'Incorrect dataset mode. Accepted modes include: "train", "test" or "val"'
 
             self._all_imgs = self.all_file_paths(data_path, type="image")
             self._all_labels = self.all_file_paths(data_path, type="label")
-            self._all_prior_preds = self.all_file_paths(data_path, type= "prior")
+            self._all_bb_preds = self.all_file_paths(data_path, type="bb_pred")
 
             self._n_images = len(self._all_imgs)
             print(f'n images in {mode} dataset: {self._n_images}')
@@ -53,15 +53,15 @@ class Cityscapes19(Dataset):
         label = np.repeat(a=label[:,:, np.newaxis],repeats=[3], axis=2)
         unlabelled_idxs = np.where(label==24)
 
-        prior = self._load_array(self._all_prior_preds[index])
-        prior = np.repeat(a=prior[:, :, np.newaxis], repeats=[3], axis=2)
-        masked_prior = self.encode_prior(prior)
-        masked_prior[unlabelled_idxs] = 24 # classify unlabelled pixels as such
+        bb_pred = self._load_array(self._all_bb_preds[index])
+        bb_pred = np.repeat(a=bb_pred[:, :, np.newaxis], repeats=[3], axis=2)
+        masked_bb_pred = self.encode_bb_pred(bb_pred)
+        masked_bb_pred[unlabelled_idxs] = 24 # classify unlabelled pixels as such
 
         sample = {
             'image': image,
             'label': label,
-            'bb_preds': masked_prior
+            'bb_preds': masked_bb_pred
         }
 
         if self._transform:
@@ -82,12 +82,12 @@ class Cityscapes19(Dataset):
             s = "leftImg8bit"
         elif type == "label":
             s = "gtFine_trainIds"
-        elif type == "prior":
+        elif type == "bb_pred":
             s = "prior_preds_trainIds"
 
         for city in path.iterdir():
-            if type == "prior":
-                city = city / "prior_preds"
+            if type == "bb_pred":
+                city = city / "bb_preds"
             for p in city.iterdir():
                 if s in str(p.stem):
                     all_files.append(p)
@@ -106,16 +106,16 @@ class Cityscapes19(Dataset):
 
         return array
 
-    def encode_prior(self, prior):
+    def encode_bb_pred(self, bb_pred):
 
         orig_labels = np.arange(-1,34)
         train_labels = np.array([24,24,24,24,24,24,24,24,0,1,24,24,2,3,4,24,24,24,5,24,6,7,8,9,10,11,12,13,14,15,24,24,16,17,18])
 
         arr = np.empty(orig_labels.max() + 1, dtype=np.uint8)
         arr[orig_labels] = train_labels
-        masked_prior = arr[prior]
+        bb_pred = arr[bb_pred]
 
-        return masked_prior
+        return bb_pred
 
 if __name__ == '__main__':
 
