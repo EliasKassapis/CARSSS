@@ -45,7 +45,7 @@ The pre-processed 180x180 2D crops for the Lung Image Database Consortium (LIDC)
 Multi-Scale Ambiguities (2019)](https://arxiv.org/abs/1905.13077) and used in this work is made publicly available from Khol et. al, and can be downloaded from 
 ([here](https://console.cloud.google.com/storage/browser/hpunet-data/lidc_crops/)).
 
-After downloading the dataset, please extract each file under *./data/datasets/lidc/*. This should give three folders under the said directory named: *lidc_crops_test*, *lidc_crops_train*, and *lidc_crops_test*.
+After downloading the dataset, extract each file under *./data/datasets/lidc/*. This should give three folders under the said directory named: *lidc_crops_test*, *lidc_crops_train*, and *lidc_crops_test*.
 
 Please note that the official repository of the 
 [Hierarchical Probabilistic U-Net](https://github.com/deepmind/deepmind-research/tree/master/hierarchical_probabilistic_unet)
@@ -60,7 +60,13 @@ As described in our paper, we integrate our model on top of a black-box segmenta
 We have processed the official Cityscapes dataset, downscaling it to a spatial resolution of 256x512 and saved predictions from the black-box segmentation network for every image in the training and validation set. The pre-processed dataset can be downloaded from
 [here](https://drive.google.com/file/d/1F5xfyW3v6gcDqrHB6JhlTQYDDm5UdRiV/view?usp=sharing).
 
-After downloading the dataset, please extract the file under *./data/datasets/cityscapes/*. This should give a folder named *processed* under the said directory named: *lidc_crops_test*, *lidc_crops_train*, and *lidc_crops_test*.
+After downloading the dataset, move the file under *./data/datasets/cityscapes/* , and extract by running:
+
+```
+tar -zxvf processed_cityscapes.gz
+```
+
+This should give a folder named *processed* under the said directory.
 
 
 ## Train your own models

@@ -171,7 +171,7 @@ def parse():
     parser = argparse.ArgumentParser()
 
     # Run mode ----------------------------------------------------------------------------------------------------------------
-    parser.add_argument('--mode', default="train", type=str, help="'train' or 'test'")
+    parser.add_argument('--mode', default="test", type=str, help="'train' or 'test'")
 
     # debug
     parser.add_argument('--debug', default=True, type=str, help="If false, does not save directories")
@@ -213,7 +213,7 @@ def parse():
 
     # Test arguments -------------False-----------------------------------------------------------------------------------------------
     parser.add_argument('--test_model_date', default="LIDC/Best_LIDC", type=str, help='date_stamp string for which model to load')
-    parser.add_argument('--test_model_suffix', default="Best_Model", type=str, help='filename string for which model to load')
+    parser.add_argument('--test_model_suffix', default="LIDC_CAR_Model", type=str, help='filename string for which model to load')
     parser.add_argument('--test_models_to_load', type=list, default=["calibration_net", "generator"])
 
     # Model arguments -----------------------------------------------------------------------------------------------------------
@@ -257,8 +257,8 @@ def parse():
     # Data arguments -------------------------------------------------------------------------------------------------------------------
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE, help='Size of batches loaded by the data loader.')
     parser.add_argument('--batch-size-plotting', type=int, default=5, help='Size of validation batch')
-    parser.add_argument('--dataset', type=str, default='CITYSCAPES19', help='LIDC, CITYSCAPES19 or CITYSCAPES35')
-    parser.add_argument('--class_flip', type=bool, default=True, help="Specifies whether to randomly flip classes in CITYSCAPES")
+    parser.add_argument('--dataset', type=str, default='LIDC', help='LIDC, CITYSCAPES19 or CITYSCAPES35')
+    parser.add_argument('--class_flip', type=bool, default=False, help="Specifies whether to randomly flip classes in CITYSCAPES")
     parser.add_argument('--flip_experiment', type = str, default = 'DEEP', help = "ROAD or DEEP") # flip only road or 5 classes flipped in the ProbabilistcUNet paper
     parser.add_argument('--crop', type=bool, default=True, help='Specifies whether to randomly crop dataset image or not')
     parser.add_argument('--resize', type=bool, default=True, help='Specifies whether to resize dataset image size or not')

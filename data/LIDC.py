@@ -26,11 +26,8 @@ class LIDC(Dataset):
 
         self.mode = mode
 
-        # data_path = personal_constants.LIDC_RAW_PATH / mode.lower() / f'images'
-        # labels_path = personal_constants.LIDC_RAW_PATH / mode.lower() / f'gt'
-
-        data_path = personal_constants.LIDC_RAW_PATH / f"lidc_crops_{mode.lower()}" / mode.lower() / f'images'
-        labels_path = personal_constants.LIDC_RAW_PATH / f"lidc_crops_{mode.lower()}" / mode.lower() / f'gt'
+        data_path = personal_constants.LIDC_PATH / f"lidc_crops_{mode.lower()}" / mode.lower() / f'images'
+        labels_path = personal_constants.LIDC_PATH / f"lidc_crops_{mode.lower()}" / mode.lower() / f'gt'
 
         assert mode in ["train", "test","val"], 'Incorrect dataset mode. Accepted modes include: "train", "test" or "val"'
 
