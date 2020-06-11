@@ -1,4 +1,8 @@
 */datasets/
+#*bb_preds/
+#*/processed/
+#*raw_cityscapes/
+#*/lidc/
 */Meeting_stuff
 */output
 */wandb/

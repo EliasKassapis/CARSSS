@@ -171,7 +171,7 @@ def parse():
     parser = argparse.ArgumentParser()
 
     # Run mode ----------------------------------------------------------------------------------------------------------------
-    parser.add_argument('--mode', default="test", type=str, help="'train' or 'test'")
+    parser.add_argument('--mode', default="train", type=str, help="'train' or 'test'")
 
     # debug
     parser.add_argument('--debug', default=True, type=str, help="If false, does not save directories")
@@ -217,13 +217,13 @@ def parse():
     parser.add_argument('--test_models_to_load', type=list, default=["calibration_net", "generator"])
 
     # Model arguments -----------------------------------------------------------------------------------------------------------
-    parser.add_argument('--calibration_net', default="SegNetCalNet", type=str, help="name of objectclass")
-    parser.add_argument('--generator', default="UNetGenerator", type=str, help="name of objectclass")
-    parser.add_argument('--discriminator', default="PixelDiscriminator", type=str, help="name of objectclass")
+    parser.add_argument('--calibration_net', default="ToyCalNet", type=str, help="name of objectclass")
+    parser.add_argument('--generator', default="EmptyGenerator", type=str, help="name of objectclass")
+    parser.add_argument('--discriminator', default="EmptyDiscriminator", type=str, help="name of objectclass")
 
     parser.add_argument('--n_generator_samples_test', default=16, type=int, help="no. of samples to be used in plots and stats")
 
-    parser.add_argument('--z_dim', default=8, type=int, help='dimensionality of latent code space')
+    parser.add_argument('--z_dim', default=32, type=int, help='dimensionality of latent code space')
     parser.add_argument('--n_hidden_cal', type=int, default=64, help='features in the first hidden layer')
     parser.add_argument('--n_hidden_gen', type=int, default=32, help='features in the first hidden layer')
     parser.add_argument('--n_hidden_dis', type=int, default=64, help='features in the first hidden layer')
@@ -248,7 +248,7 @@ def parse():
     parser.add_argument('--CalLoss_weight', default=5, type=float, help="weight hyperparameter for specific generatorloss")
     parser.add_argument('--ComplexityLoss_weight', default=0, type=float, help="weight hyperparameter for specific generatorloss")
 
-    parser.add_argument('--n_cal_samples', default=5, type=float, help="Number of samples to use for prediction average in cal loss")
+    parser.add_argument('--n_cal_samples', default=7, type=float, help="Number of samples to use for prediction average in cal loss")
 
     # hyperparams for Discriminatorloss
     parser.add_argument('--DefaultDLoss_weight', default= 1, type=float, help="weight hyperparameter for specific discriminatorloss")
@@ -257,8 +257,8 @@ def parse():
     # Data arguments -------------------------------------------------------------------------------------------------------------------
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE, help='Size of batches loaded by the data loader.')
     parser.add_argument('--batch-size-plotting', type=int, default=5, help='Size of validation batch')
-    parser.add_argument('--dataset', type=str, default='LIDC', help='LIDC, CITYSCAPES19 or CITYSCAPES35')
-    parser.add_argument('--class_flip', type=bool, default=False, help="Specifies whether to randomly flip classes in CITYSCAPES")
+    parser.add_argument('--dataset', type=str, default='CITYSCAPES19', help='LIDC, CITYSCAPES19 or CITYSCAPES35')
+    parser.add_argument('--class_flip', type=bool, default=True, help="Specifies whether to randomly flip classes in CITYSCAPES")
     parser.add_argument('--flip_experiment', type = str, default = 'DEEP', help = "ROAD or DEEP") # flip only road or 5 classes flipped in the ProbabilistcUNet paper
     parser.add_argument('--crop', type=bool, default=True, help='Specifies whether to randomly crop dataset image or not')
     parser.add_argument('--resize', type=bool, default=True, help='Specifies whether to resize dataset image size or not')

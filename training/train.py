@@ -77,7 +77,7 @@ class TrainingProcess:
         if self.args.dataset == "LIDC":
             self.plotting_batches = list(iter(self.dataloader_validation))[2]
         else:
-            self.plotting_batches = next(iter(self.dataloader_validation))
+            self.plotting_batches = list(iter(self.dataloader_validation))[8]
 
         # assert type
         assert_type(GeneralCalNet, calibration_net)

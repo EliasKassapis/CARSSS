@@ -128,26 +128,26 @@ if __name__ == '__main__':
     transform = transforms.Compose(
         [
             transformations.Crop(imsize=constants.IMSIZE),
-            transformations.RandomHorizontalFlip(),
-            transformations.ClassFlip(*CITYSCAPES19_DEEPFLIP),
+            # transformations.RandomHorizontalFlip(),
+            # transformations.ClassFlip(*CITYSCAPES19_DEEPFLIP),
             transformations._2d_to_1hot(),
             transformations.RescaleValues(),
             transformations.ChangeChannels()
         ]
     )
 
-    dataset = Cityscapes19(mode="train", transform=transform) #TODO NO TEST DIRECTORY IN PROCESSED
+    dataset = Cityscapes19(mode="test", transform=transform) #TODO NO TEST DIRECTORY IN PROCESSED
 
-    batch_size = 8
+    batch_size = 5
 
-    data = DataLoader(dataset, shuffle=True, batch_size=batch_size, drop_last=True, pin_memory=True, num_workers=16)
+    data = DataLoader(dataset, shuffle=False, batch_size=batch_size, drop_last=True, pin_memory=True, num_workers=16)
 
     data_bar = tqdm(data)
 
     for i, (batches) in enumerate(data_bar):
 
         # Visualize batches for DEBUG
-        batch_1 = batches
+        batch_1 = list(iter(data))[8]
 
         image_1, labels_1 = unpack_batch(batch_1)
 
@@ -162,3 +162,4 @@ if __name__ == '__main__':
         plt.figure(figsize=(5,10))
         plt.imshow(vutils.make_grid(batch, nrow=batch_size, normalize=True).cpu().numpy().transpose(1, 2, 0))
         plt.show()
+        error
