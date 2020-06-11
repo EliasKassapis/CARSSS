@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from utils.architecture_utils import initialize_weights
 
 """
-Note: The code for the SegNet prior is adapted from https://github.com/zijundeng/pytorch-semantic-segmentation
+Note: The code for the SegNet calibration net is adapted from https://github.com/zijundeng/pytorch-semantic-segmentation
 """
 
 class _DecoderBlock(nn.Module):

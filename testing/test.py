@@ -257,7 +257,7 @@ def validation_plots(batch,
     calnet_preds, calnet_labelled_imgs, fake_labels, pred_dist, al_maps, gan_al_maps = test_forward_pass(images, labels, bb_preds, generator, calibration_net, discriminator, args)
 
 
-    # save best prior
+    # save best calibration net
     if args.dataset == "LIDC":
         lab_dist = torch.eye(LABELS_CHANNELS)[(gt_dist).long()].permute(1,0,4,2,3).to(DEVICE).mean(0)
         eps=1e-7

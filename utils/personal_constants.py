@@ -1,8 +1,5 @@
 from pathlib import Path
 
-from utils import constants
-
-
 LIDC_PATH = Path('./data/datasets/lidc/')
 CITYSCAPES_PATH = Path('./data/datasets/cityscapes/')
 

@@ -9,22 +9,12 @@ from utils.training_helpers import renormalize
 
 
 class DeepLabV3CalNet(GeneralCalNet):
-    """ Defines a Toy Generator"""
 
     def __init__(self, n_channels_in: int = 3, n_channels_out: int = 3, n_hidden: int = 64,
                  norm_layer: nn.Module = nn.BatchNorm2d, use_dropout: bool = True,
                  n_hidden_layers: int = 3, padding_type: str = 'reflect', temperature: float = 1,
                  device: str = "cpu", **kwargs):
-        """
-        n_channels_in (int)      - no. of channels in input images
-        n_channels_out (int)     - no. number of channels in output images
-        n_hidden (int)     - no. of filters in the last hidden layer
-        norm_layer         - normalization layer
-        use_dropout (bool) - use dropout layers or not
-        n_hidden_layers (int) - no of hidden layers
-        padding_type (str) - type of padding: zero, replicate, or reflect
-        temperature - magnitude of temperature scaling
-        """
+
         super(DeepLabV3CalNet, self).__init__(n_channels_in, n_channels_out, device, **kwargs)
 
         # save for use in forward pass
@@ -46,8 +36,7 @@ class DeepLabV3CalNet(GeneralCalNet):
         if return_logits:
             return logits
         else:
-            return F.softmax(logits/self.temperature, dim=1) # todo pass args.temperature from prior initialization in main
-
+            return F.softmax(logits/self.temperature, dim=1)
 
 if __name__ == '__main__':
     # Test if working

@@ -19,7 +19,7 @@ class Cityscapes35(Cityscapes): #todo place limit on dataset!!!!!
             transform = None,
     ):
 
-        super(Cityscapes35, self).__init__(target_type="semantic",mode="fine", split= mode.lower(), transform=transform, target_transform=transform,root=personal_constants.CITYSCAPES_PATH) #root="/home/kassapis/Desktop/MSc_Thesis/data/datasets/Cityscapes")
+        super(Cityscapes35, self).__init__(target_type="semantic",mode="fine", split= mode.lower(), transform=transform, target_transform=transform,root=personal_constants.CITYSCAPES_PATH)
 
     def __getitem__(self, index):
         """

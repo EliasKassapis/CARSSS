@@ -153,9 +153,8 @@ def calibration_net_forward_pass(calibration_net, images, bb_preds, ign_idxs, ar
     else:
         p_input = images
 
-    # forward pass without dropout
     calnet_preds_logits = calibration_net(p_input, return_logits=True)
-    calnet_preds = F.softmax(calnet_preds_logits / args.temperature.reshape(1, LABELS_CHANNELS, 1, 1).to(DEVICE), dim=1)  # perform temperature scaling #todo do we need temperature scaling if we are using the heteroscedastic model??
+    calnet_preds = F.softmax(calnet_preds_logits / args.temperature.reshape(1, LABELS_CHANNELS, 1, 1).to(DEVICE), dim=1)  # perform temperature scaling
 
     if ign_idxs is not None:
         # set unlabelled pixels to class unlabelled

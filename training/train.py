@@ -119,7 +119,7 @@ class TrainingProcess:
             unlabelled_idxs = None
 
         # combine x and y
-        true_labelled = torch.cat((images, labels), dim=CHANNEL_DIM)
+        gt_labelled_imgs = torch.cat((images, labels), dim=CHANNEL_DIM)
 
         if train:
             # set all models to evaluation mode
@@ -145,7 +145,8 @@ class TrainingProcess:
                 calnet_preds_logits, calnet_preds, calnet_labelled_imgs = calibration_net_forward_pass(self.calibration_net, images, bb_preds, unlabelled_idxs, self.args)
 
                 # evaluate aletoric uncertainty
-                aleatoric_maps = get_entropy(calnet_preds, dim=CHANNEL_DIM)
+                with torch.no_grad():
+                    aleatoric_maps = get_entropy(calnet_preds, dim=CHANNEL_DIM)
 
                 # make sure that the weight for the calibration net loss is not zero!
                 assert self.loss_calnet.active, "Calibration net loss is not active! (weight = 0)"
@@ -190,7 +191,7 @@ class TrainingProcess:
             # compute generator lossmultinomial(p,1)
             loss_gen, loss_gen_saving =  self.loss_gen(images,
                                                        labels,
-                                                       true_labelled,
+                                                       gt_labelled_imgs,
                                                        calnet_preds,
                                                        calnet_labelled_imgs,
                                                        preds,
@@ -232,13 +233,13 @@ class TrainingProcess:
                 # real loss
                 get_loss = torch.nn.BCELoss()
 
-                true_labelled.requires_grad_()
-                real_scores = self.discriminator(true_labelled)
+                gt_labelled_imgs.requires_grad_()
+                real_scores = self.discriminator(gt_labelled_imgs)
                 real_labels = torch.ones(real_scores.shape).to(DEVICE)
                 real_loss = get_loss(real_scores, real_labels)
 
                 if accuracy_discriminator < self.args.DiscDAccCap:
-                    real_grad = autograd.grad(outputs=real_scores.sum(), inputs=true_labelled, create_graph=True, retain_graph=True)[0]
+                    real_grad = autograd.grad(outputs=real_scores.sum(), inputs=gt_labelled_imgs, create_graph=True, retain_graph=True)[0]
                     r1 = torch.sum(real_grad.pow(2.0), dim=[1, 2, 3])
 
                 # fake loss
@@ -264,7 +265,7 @@ class TrainingProcess:
             else:
                 with torch.no_grad(): # do not cache
                     # forward pass discriminator
-                    combined_input, scores, gt_labels, accuracy_discriminator = discriminator_forward_pass(self.discriminator, true_labelled, pred_labelled, self.args)
+                    combined_input, scores, gt_labels, accuracy_discriminator = discriminator_forward_pass(self.discriminator, gt_labelled_imgs, pred_labelled, self.args)
 
                     # compute dicsriminator loss
                     loss_dis, loss_dis_saving = self.loss_dis(self.discriminator, combined_input, scores, gt_labels, self.args)

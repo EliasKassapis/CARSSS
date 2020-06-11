@@ -69,26 +69,23 @@ To download the official Cityscapes dataset:
 5) Configure your data directories in `./data/datasets/cityscapes/preprocessing_config.py` . 
 6) Run `./data/datasets/cityscapes/preprocessing.py` to pre-process the data in downscaled numpy arrays and save under `./data/datasets/cityscapes/processed`.
 
-Subsequently [download](https://drive.google.com/file/d/1EkJD1PUe7J5f5oc_VvUj-7a7XTT-I-Gc/view?usp=sharing) the black-box predictions under `./data/datasets/cityscapes/`, and extract by running:
+Subsequently [download](https://drive.google.com/file/d/1EkJD1PUe7J5f5oc_VvUj-7a7XTT-I-Gc/view?usp=sharing) the black-box predictions under `./data/datasets/cityscapes/`, and extract by running `tar -zxvf cityscapes_bb_preds.tar.gz`
 
-```
-tar -zxvf cityscapes_bb_preds.tar.gz
-```
-Finally, move the black-box predictions in the processed 
+Finally, move the black-box predictions in the processed cityscapes folder and setup the test set run `./data/datasets/cityscapes/move_bb_preds.py`
 
 ## Train your own models
 
-To train you own calibrated adversarial refinement (CAR) model on the LIDC dataset, run:
+To train you own calibrated adversarial refinement (CAR) model on the LIDC dataset, set `LABELS_CHANNELS=2` in line 29 of `./utils/constants.py` run:
 
 ```
-python main.py --mode train --calibration_net SegNetCalNet --zdim 8 --dataset LIDC --class_flip False
+python main.py --mode train --calibration_net SegNetCalNet --z_dim 8 --batch-size 32 --dataset LIDC --class_flip ''
 ```
 
 
-To train you own CAR model using the black-box predictions on the modified Cityscapes dataset, run:
+To train you own CAR model using the black-box predictions on the modified Cityscapes dataset, set `LABELS_CHANNELS=25` in line 29 of `./utils/constants.py` and run:
 
 ```
-python main.py --mode train --calibration_net ToyCalNet --zdim 32 --dataset CITYSCAPES19 --class_flip True
+python main.py --mode train --calibration_net ToyCalNet --z_dim 32 --batch-size 16 --dataset CITYSCAPES19 --class_flip True
 ```
 
 Launching a run in train mode will create a new directory with the date and time of the start of your run under `./results/output/`, where plots documenting the progress of the training and are saved and models are checkpointed. For example, a run launched on 12:00:00 on 1/1/2020 will create a new folder

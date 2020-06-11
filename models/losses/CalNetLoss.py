@@ -16,12 +16,17 @@ class CalNetLoss(GeneralLoss):
 
         calnet_preds_train = F.softmax(calnet_preds_logits, dim=1)
 
-        if args.dataset == "LIDC":
-            train_mask = torch.ones(labels.argmax(1).shape).to(DEVICE)
-        else:
-            train_mask = (labels.argmax(1) != 24)
+        # if args.dataset == "LIDC":
+        #     train_mask = torch.ones(labels.argmax(1).shape).to(DEVICE)
+        # else:
+        #     train_mask = (labels.argmax(1) != 24)
+        #
+        # loss = -((1*train_mask)*torch.sum(labels*torch.log(calnet_preds_train.clamp(min=1e-7)),dim=1)).mean()
 
-        loss = -((1*train_mask)*torch.sum(labels*torch.log(calnet_preds_train.clamp(min=1e-7)),dim=1)).mean()
+        train_mask = (labels.argmax(1) != 24)
+        ignore_mask = torch.ones(train_mask.shape).to(DEVICE)
+        loss = -((1 * train_mask * ignore_mask) * torch.sum(labels * torch.log(calnet_preds_train.clamp(min=1e-7)),
+                                                            dim=1)).mean()
 
         return self.weight*loss
 

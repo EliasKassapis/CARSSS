@@ -5,7 +5,7 @@ import torch.nn as nn
 
 
 class EmptyCalNet(GeneralCalNet):
-    """ for running without prior Generator """
+    """ for running without Calibration Net """
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
