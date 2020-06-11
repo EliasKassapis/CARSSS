@@ -37,7 +37,9 @@ pip install -r requirements.txt
 ```
 
 ## Datasets
-###Download the LIDC dataset
+
+### Download the LIDC dataset
+
 The pre-processed 180x180 2D crops for the Lung Image Database Consortium (LIDC) image collection dataset 
 ([LIDC-IDRI](https://wiki.cancerimagingarchive.net/display/Public/LIDC-IDRI))
 , as described in 
@@ -51,7 +53,8 @@ Please note that the official repository of the
 [Hierarchical Probabilistic U-Net](https://github.com/deepmind/deepmind-research/tree/master/hierarchical_probabilistic_unet)
 , the version of the dataset linked above containts 8843 images for training, 1993 for validation and 1980 for testing rather than 8882, 1996 and 1992 images as used in our experiments, however, the score remains the same.
 
-###Download the pre-processed Cityscapes dataset with the black-box predictions
+### Download the pre-processed Cityscapes dataset with the black-box predictions
+
 As described in our paper, we integrate our model on top of a black-box segmentation network. We used a pre-trained *DeepLabV3+(Xception65+ASPP)* model publically available 
 [here](https://github.com/nyoki-mtl/pytorch-segmentation)
 . We found that this model obtains a mIoU score of 0.79 on the official test-set of the Cityscapes dataset
