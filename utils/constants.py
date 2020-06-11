@@ -109,7 +109,7 @@ CITYSCAPES19_IMSIZE = (1024,2048)
 
 CITYSCAPES19_COLOUR_ENCODING = OrderedDict([
     ('road', (128, 64, 128)),
-    ('sidewalk', (60, 40, 222)), # changed colour
+    ('sidewalk', (60, 40, 222)),
     ('building', (70, 70, 70)),
     ('wall', (102, 102, 156)),
     ('fence', (190, 153, 153)),
@@ -120,19 +120,19 @@ CITYSCAPES19_COLOUR_ENCODING = OrderedDict([
     ('terrain', (152, 251, 152)),
     ('sky', (70, 130, 180)), #10
     ('person', (220, 20, 60)),
-    ('rider', (0, 0, 110)), # changed colour
+    ('rider', (0, 0, 110)),
     ('car', (0, 0, 142)),
     ('truck', (0, 0, 70)),
     ('bus', (0, 60, 100)), #15
     ('train', (0, 80, 100)),
     ('motorcycle', (0, 0, 230)),
     ('bicycle', (119, 11, 32)),
-    ###################################### #todo added these for random class flipping
-    ('sidewalk2', (219, 112, 147)),  # p=8/17 (0,80,100)
+    ###################################### added these for random class flipping
+    ('sidewalk2', (219, 112, 147)),  # p=8/17
     ('person2', (0, 180, 0)),  # p=7/17
     ('car2', (255, 0, 255)),  # p=6/17
-    ('vegetation2', (255, 0, 0)),  # p=5/17 (255, 0, 0)  (255,165,0) #todo change this!
-    ('road2', (255, 165, 0)),  # p=4/17 (220, 20, 60)
+    ('vegetation2', (255, 0, 0)),  # p=5/17
+    ('road2', (255, 165, 0)),  # p=4/17
     #######################################
     ('unlabeled',(0, 0, 0))
 ])

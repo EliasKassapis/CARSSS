@@ -68,7 +68,7 @@ As described in our paper, we integrate our model on top of a black-box segmenta
 . We found that this model obtains a mIoU score of 0.79 on the official test-set of the Cityscapes dataset
 ([Cityscapes](https://www.cityscapes-dataset.com/)).
 
-To download the official Cityscapes dataset:
+To get the official 19-class Cityscapes dataset:
 
 1) Visit the Cityscapes [website](https://www.cityscapes-dataset.com/) and create an account
 2) Download the [images](https://www.cityscapes-dataset.com/file-handling/?packageID=3) and [annotations](https://www.cityscapes-dataset.com/file-handling/?packageID=1) 
