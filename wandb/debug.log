@@ -1,0 +1,25 @@
+2020-06-11 18:02:30,432 DEBUG   MainThread:12091 [wandb_config.py:_load_defaults():119] no defaults not found in config-defaults.yaml
+2020-06-11 18:02:30,433 DEBUG   MainThread:12091 [cmd.py:execute():719] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/home/kassapis/Desktop/CAR, universal_newlines=False, shell=None, istream=None)
+2020-06-11 18:02:30,445 DEBUG   MainThread:12091 [meta.py:setup():97] code probe starting
+2020-06-11 18:02:30,445 DEBUG   MainThread:12091 [meta.py:_setup_code_git():49] probe for git information
+2020-06-11 18:02:30,446 DEBUG   MainThread:12091 [cmd.py:execute():719] Popen(['git', 'cat-file', '--batch-check'], cwd=/home/kassapis/Desktop/CAR, universal_newlines=False, shell=None, istream=<valid stream>)
+2020-06-11 18:02:30,450 DEBUG   MainThread:12091 [cmd.py:execute():719] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/home/kassapis/Desktop/CAR, universal_newlines=False, shell=None, istream=None)
+2020-06-11 18:02:30,452 DEBUG   MainThread:12091 [meta.py:_setup_code_program():58] save program starting
+2020-06-11 18:02:30,452 DEBUG   MainThread:12091 [meta.py:_setup_code_program():60] save program starting: /home/kassapis/Desktop/CAR/./main.py
+2020-06-11 18:02:30,452 DEBUG   MainThread:12091 [meta.py:_setup_code_program():65] save program saved: /home/kassapis/Desktop/CAR/wandb/run-20200611_160221-2t3qv09w/code/main.py
+2020-06-11 18:02:30,453 DEBUG   MainThread:12091 [meta.py:_setup_code_program():67] save program
+2020-06-11 18:02:30,453 DEBUG   MainThread:12091 [meta.py:setup():119] code probe done
+2020-06-11 18:02:30,462 DEBUG   MainThread:12091 [run_manager.py:__init__():541] Initialized sync for CAR/2t3qv09w
+2020-06-11 18:02:30,464 INFO    MainThread:12091 [run_manager.py:wrap_existing_process():1144] wrapping existing process 12065
+2020-06-11 18:02:30,464 WARNING MainThread:12091 [io_wrap.py:register():104] SIGWINCH handler was not None: <Handlers.SIG_DFL: 0>
+2020-06-11 18:02:30,466 DEBUG   MainThread:12091 [connectionpool.py:_new_conn():959] Starting new HTTPS connection (1): pypi.org:443
+2020-06-11 18:02:30,508 DEBUG   MainThread:12091 [connectionpool.py:_make_request():437] https://pypi.org:443 "GET /pypi/wandb/json HTTP/1.1" 200 44280
+2020-06-11 18:02:30,524 INFO    MainThread:12091 [run_manager.py:init_run():924] system metrics and metadata threads started
+2020-06-11 18:02:30,524 INFO    MainThread:12091 [run_manager.py:wrap_existing_process():1161] informing user process we are ready to proceed
+2020-06-11 18:02:30,524 INFO    MainThread:12091 [run_manager.py:_sync_etc():1268] entering loop for messages from user process
+2020-06-11 18:02:31,438 INFO    Thread-3  :12091 [run_manager.py:_on_file_modified():688] file/dir modified: /home/kassapis/Desktop/CAR/wandb/run-20200611_160221-2t3qv09w/config.yaml
+2020-06-11 18:02:51,304 INFO    MainThread:12091 [run_manager.py:_sync_etc():1324] process received interrupt signal, shutting down
+2020-06-11 18:02:51,310 INFO    MainThread:12091 [run_manager.py:_sync_etc():1377] closing log streams and sending exitcode to W&B
+2020-06-11 18:02:51,311 INFO    MainThread:12091 [run_manager.py:shutdown():1068] shutting down system stats and metadata service
+un_manager.py:_sync_etc():1377] closing log streams and sending exitcode to W&B
+2020-06-11 18:02:51,311 INFO    MainThread:12091 [2t3qv09w:run_manager.py:shutdown():1068] shutting down system stats and metadata service

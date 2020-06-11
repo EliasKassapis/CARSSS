@@ -1,0 +1,232 @@
+wandb_version: 1
+
+CalLoss_weight:
+  desc: null
+  value: 5
+CalNetLoss_weight:
+  desc: null
+  value: 1
+ComplexityLoss_weight:
+  desc: null
+  value: 0
+DefaultDLoss_weight:
+  desc: null
+  value: 1
+DiscDAccCap:
+  desc: null
+  value: 0.85
+NonSaturatingGLoss_weight:
+  desc: null
+  value: 10
+PixelLoss_weight:
+  desc: null
+  value: 0
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.8.29
+    code_path: code/main.py
+    framework: torch
+    is_jupyter_run: false
+    python_version: 3.7.0
+batch_size:
+  desc: null
+  value: 2
+batch_size_plotting:
+  desc: null
+  value: 5
+calibration_net:
+  desc: null
+  value: ToyCalNet
+class_flip:
+  desc: null
+  value: true
+crop:
+  desc: null
+  value: true
+dataset:
+  desc: null
+  value: CITYSCAPES19
+debug:
+  desc: null
+  value: ''
+device:
+  desc: null
+  value: cuda
+discriminator:
+  desc: null
+  value: PixelDiscriminator
+dropout:
+  desc: null
+  value: false
+epochs:
+  desc: null
+  value: 1000000
+eval_freq:
+  desc: null
+  value: 10
+flip_experiment:
+  desc: null
+  value: DEEP
+generator:
+  desc: null
+  value: UNetGenerator
+imsize:
+  desc: null
+  value:
+  - 128
+  - 128
+label_smoothing:
+  desc: null
+  value: false
+learning_rate_cal:
+  desc: null
+  value: 0.0002
+learning_rate_dis:
+  desc: null
+  value: 1.0e-05
+learning_rate_gen:
+  desc: null
+  value: 0.0002
+loss_dis:
+  desc: null
+  value: TotalDiscriminatorLoss
+loss_gen:
+  desc: null
+  value: TotalGeneratorLoss
+lr_step_cal:
+  desc: null
+  value:
+  - - 250
+    - 500
+  - 1
+lr_step_dis:
+  desc: null
+  value:
+  - - 30
+    - 500
+    - 1000
+  - 1
+lr_step_gen:
+  desc: null
+  value:
+  - - 100
+    - 500
+    - 1000
+  - 1
+max_training_minutes:
+  desc: null
+  value: 7197
+mode:
+  desc: null
+  value: train
+models_to_load:
+  desc: null
+  value:
+  - calibration_net
+n_MC_dropout_test:
+  desc: null
+  value: 100
+n_MC_dropout_train:
+  desc: null
+  value: 1
+n_cal_samples:
+  desc: null
+  value: 7
+n_generator_samples_test:
+  desc: null
+  value: 16
+n_hidden_cal:
+  desc: null
+  value: 64
+n_hidden_dis:
+  desc: null
+  value: 64
+n_hidden_gen:
+  desc: null
+  value: 32
+noise:
+  desc: null
+  value: false
+opt_betas:
+  desc: null
+  value:
+  - 0.5
+  - 0.99
+opt_weight_decay:
+  desc: null
+  value: 0.0005
+plot_freq:
+  desc: null
+  value: 400
+pretrained:
+  desc: null
+  value: false
+pretrained_model_date:
+  desc: null
+  value: LIDC/Best_LIDC
+pretrained_model_suffix:
+  desc: null
+  value: Best_Model
+resize:
+  desc: null
+  value: true
+resume:
+  desc: null
+  value: false
+saving_freq:
+  desc: null
+  value: 50
+schedule:
+  desc: null
+  value:
+  - 50
+  - 200
+temperature:
+  desc: null
+  value:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+test_model_date:
+  desc: null
+  value: LIDC/Best_LIDC
+test_model_suffix:
+  desc: null
+  value: LIDC_CAR_Model
+test_models_to_load:
+  desc: null
+  value:
+  - calibration_net
+  - generator
+timing:
+  desc: null
+  value: false
+use_MC_dropout:
+  desc: null
+  value: false
+z_dim:
+  desc: null
+  value: 32

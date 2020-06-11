@@ -3,11 +3,19 @@
 PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper "Calibrated Adversarial Refinement for Multimodal Semantic Segmentation".
 
 ## Getting Started
+
+### Prerequisites
+* Python3
+* NVIDIA GPU + CUDA CuDNN
+
+
+This was tested an Ubuntu 18.04 system, on a single 16GB Tesla V100 GPU, but might work on other operating systems as well.
+
 ### Setup virtual environment
 To install the requirements for this code run:
 ```
-virtualenv -p python3 venv
-source venv/bin/activate
+python3 -m venv ~/car_venv
+source ~/car_venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -78,32 +86,38 @@ Finally, move the black-box predictions in the processed cityscapes folder and s
 To train you own calibrated adversarial refinement (CAR) model on the LIDC dataset, set `LABELS_CHANNELS=2` in line 29 of `./utils/constants.py` run:
 
 ```
-python main.py --mode train --calibration_net SegNetCalNet --z_dim 8 --batch-size 32 --dataset LIDC --class_flip ''
+python main.py --mode train --debug '' --calibration_net SegNetCalNet --z_dim 8 --batch-size 32 --dataset LIDC --class_flip ''
 ```
-
 
 To train you own CAR model using the black-box predictions on the modified Cityscapes dataset, set `LABELS_CHANNELS=25` in line 29 of `./utils/constants.py` and run:
 
 ```
-python main.py --mode train --calibration_net ToyCalNet --z_dim 32 --batch-size 16 --dataset CITYSCAPES19 --class_flip True
+python main.py --mode train --debug '' --calibration_net ToyCalNet --z_dim 32 --batch-size 16 --dataset CITYSCAPES19 --class_flip True
 ```
 
 Launching a run in train mode will create a new directory with the date and time of the start of your run under `./results/output/`, where plots documenting the progress of the training and are saved and models are checkpointed. For example, a run launched on 12:00:00 on 1/1/2020 will create a new folder
- `./results/output/2020-01-01_12:00:00/` .
+ `./results/output/2020-01-01_12:00:00/` . To prevent the creation of this directory, set `--debug False` in the run command above.
 
 
 ## Evaluation
 
-To evaluate a pre-trained model or your own trained model 
-
-### Download pre-trained models
+### LIDC pre-trained model
 A pre-trained CAR model on LIDC can be downloaded from
 [here](https://drive.google.com/file/d/1FxsvJjcRt3CsXmokQ4L8cfPVwu3teiTn/view?usp=sharing).
+To evaluate this model set `LABELS_CHANNELS=2`, move the downloaded pickle file under `./results/output/LIDC/saved_models/` and run:
 
+```
+python main.py --mode test --test_model_date LIDC --test_model_suffix LIDC_CAR_Model --calibration_net SegNetCalNet --z_dim 8 --dataset LIDC --class_flip
+```
 
+### Cityscapes pre-trained model
 A pre-trained CAR model on the modified Cityscapes dataset can be downloaded from
 [here](https://drive.google.com/file/d/1MJzZbByAU7MjNUH1TCuOoA4fwNvK1XF9/view?usp=sharing).
+To evaluate this model set `LABELS_CHANNELS=25` and `IMSIZE = (256, 512)` in `./utils/constants.py`, move the downloaded pickle file under `./results/output/CS/saved_models/` and run:
 
+```
+python main.py --mode test --test_model_date CS --test_model_suffix CS_CAR_Model --calibration_net ToyCalNet --z_dim 32 --dataset CITYSCAPES19 --class_flip True
+```
 
 ## License
 The code in this repository is published under the [Apache License Version 2.0](LICENSE).

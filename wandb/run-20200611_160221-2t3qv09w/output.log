@@ -1,0 +1,17 @@
+n images in train dataset: 2701
+finished loading 1350 batches for train dataset
+n images in test dataset: 274
+finished loading 54 batches for test dataset
+Ignored arguments in ToyCalNet: {'imsize': (128, 128)}
+Ignored arguments in UNetGenerator: {'use_dropout': False}
+{'opt_weight_decay': 0.0005, 'CalNetLoss_weight': 1, 'NonSaturatingGLoss_weight': 10, 'PixelLoss_weight': 0, 'CalLoss_weight': 5, 'ComplexityLoss_weight': 0, 'DefaultDLoss_weight': 1}
+PixelLoss deactivated due to weight = 0
+ComplexityLoss deactivated due to weight = 0
+Made datestamp: 2020-06-11_18:02:31
+[1mStarted training with the following config:[0m
+Namespace(CalLoss_weight=5, CalNetLoss_weight=1, ComplexityLoss_weight=0, DefaultDLoss_weight=1, DiscDAccCap=0.85, NonSaturatingGLoss_weight=10, PixelLoss_weight=0, batch_size=2, batch_size_plotting=5, calibration_net='ToyCalNet', class_flip=True, crop=True, dataset='CITYSCAPES19', debug='', device='cuda', discriminator='PixelDiscriminator', dropout=False, epochs=1000000, eval_freq=10, flip_experiment='DEEP', generator='UNetGenerator', imsize=(128, 128), label_smoothing=False, learning_rate_cal=0.0002, learning_rate_dis=1e-05, learning_rate_gen=0.0002, loss_dis='TotalDiscriminatorLoss', loss_gen='TotalGeneratorLoss', lr_step_cal=([250, 500], 1), lr_step_dis=([30, 500, 1000], 1), lr_step_gen=([100, 500, 1000], 1), max_training_minutes=7197, mode='train', models_to_load=['calibration_net'], n_MC_dropout_test=100, n_MC_dropout_train=1, n_cal_samples=7, n_generator_samples_test=16, n_hidden_cal=64, n_hidden_dis=64, n_hidden_gen=32, noise=False, opt_betas=(0.5, 0.99), opt_weight_decay=0.0005, plot_freq=400, pretrained=False, pretrained_model_date='LIDC/Best_LIDC', pretrained_model_suffix='Best_Model', resize=True, resume=False, saving_freq=50, schedule=(50, 200), temperature=tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1.]), test_model_date='LIDC/Best_LIDC', test_model_suffix='LIDC_CAR_Model', test_models_to_load=['calibration_net', 'generator'], timing=False, use_MC_dropout=False, z_dim=32)
+
+
+[1mStarting epoch[0m 0/1000000 at 2020-06-11 18:02:32.422010
+ batch: 0/1350 |	 loss-calnet-train: 3.077, loss-generator-train: 8.062, loss-discriminator-train: 1.386, accuracy-discriminator: 0.5  details: Gen = {'NonSaturatingGLoss': 6.922472953796387, 'CalLoss': 1.139480471611023}, Dis = {'DefaultDLoss': 1.3863143920898438, 'Regularized Loss': 2.0455905413996334e-08}
