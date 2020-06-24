@@ -1,6 +1,6 @@
 # Calibrated Adversarial Refinement for Multimodal Semantic Segmentation
 
-PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper "Calibrated Adversarial Refinement for Multimodal Semantic Segmentation". An overview of the model architecture is depicted below, with ambiguous boundary segmentation 
+PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Multimodal Semantic Segmentation</a>. An overview of the model architecture is depicted below, with ambiguous boundary segmentation 
 as a use case.
 
 <p align="center">
