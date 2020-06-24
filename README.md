@@ -116,7 +116,7 @@ Launching a run in train mode will create a new directory with the date and time
 
 ### LIDC pre-trained model
 A pre-trained model on LIDC can be downloaded from
-[here](https://drive.google.com/file/d/1FxsvJjcRt3CsXmokQ4L8cfPVwu3teiTn/view?usp=sharing).
+[here](https://drive.google.com/file/d/1y9pasurOlANj2F01o4HrxyiUNHqN8JwX/view?usp=sharing).
 To evaluate this model set `LABELS_CHANNELS=2`, move the downloaded pickle file under `./results/output/LIDC/saved_models/` and run:
 
 ```
