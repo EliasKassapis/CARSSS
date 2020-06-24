@@ -136,21 +136,11 @@ python main.py --mode test --test_model_date CS --test_model_suffix CS_CAR_Model
 If you use this code for your research, please cite our paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Multimodal Semantic Segmentation</a>:
 
 ```
-@ARTICLE{2020arXiv200613144K,
-       author = {{Kassapis}, Elias and {Dikov}, Georgi and {Gupta}, Deepak K. and
-         {Nugteren}, Cedric},
-        title = "{Calibrated Adversarial Refinement for Multimodal Semantic Segmentation}",
-      journal = {arXiv e-prints},
-     keywords = {Computer Science - Computer Vision and Pattern Recognition},
-         year = 2020,
-        month = jun,
-          eid = {arXiv:2006.13144},
-        pages = {arXiv:2006.13144},
-archivePrefix = {arXiv},
-       eprint = {2006.13144},
- primaryClass = {cs.CV},
-       adsurl = {https://ui.adsabs.harvard.edu/abs/2020arXiv200613144K},
-      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+@article{kassapis2020calibrated,
+    title={{Calibrated Adversarial Refinement for Multimodal Semnatic Segmentation}},
+    author={Kassapis, Elias and Dikov, Georgi and Gupta, Deepak K. and Nugteren, Cedric},
+    journal={arXiv preprint arXiv:2006.13144},
+    year={2020}
 }
 ```
 
