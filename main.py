@@ -171,7 +171,7 @@ def parse():
     parser = argparse.ArgumentParser()
 
     # Run mode ----------------------------------------------------------------------------------------------------------------
-    parser.add_argument('--mode', default="train", type=str, help="'train' or 'test'")
+    parser.add_argument('--mode', default="test", type=str, help="'train' or 'test'")
 
     # debug
     parser.add_argument('--debug', default=True, type=str, help="If false, does not save directories")
@@ -181,7 +181,7 @@ def parse():
     # Pre-training arguments --------------------------------------------------------------------------------------------------
     parser.add_argument('--pretrained', type=bool, default=False, help='Determines if we load a trained model or not')
     parser.add_argument('--resume', type=bool, default=False, help='Determines if we resume training on the pre-trained model or not')
-    parser.add_argument('--pretrained_model_date', type=str, default="LIDC/Best_LIDC", help='date_stamp string for which model to load')
+    parser.add_argument('--pretrained_model_date', type=str, default="LIDC", help='date_stamp string for which model to load')
     parser.add_argument('--pretrained_model_suffix', type=str, default="Best_Model", help='filename string for which model to load')
     parser.add_argument('--models_to_load', type=list, default=["calibration_net"], help='list containing the name of models to load (["calibration_net", "generator", "discriminator"])')
 
@@ -212,7 +212,7 @@ def parse():
 
 
     # Test arguments -------------False-----------------------------------------------------------------------------------------------
-    parser.add_argument('--test_model_date', default="LIDC/Best_LIDC", type=str, help='date_stamp string for which model to load')
+    parser.add_argument('--test_model_date', default="LIDC", type=str, help='date_stamp string for which model to load')
     parser.add_argument('--test_model_suffix', default="LIDC_CAR_Model", type=str, help='filename string for which model to load')
     parser.add_argument('--test_models_to_load', type=list, default=["calibration_net", "generator"])
 

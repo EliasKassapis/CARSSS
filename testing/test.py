@@ -22,6 +22,7 @@ def evaluation(dataloader_test, generator, calibration_net, discriminator, args,
         avgSS = []
         total_pixel_mode_counts = 0
         avg_calnet_class_probs = []
+        if args.dataset == "LIDC": avgHungarian = []
 
         for i, (batch) in tqdm(enumerate(dataloader_test), total=len(dataloader_test)):
             if i >= number_of_batches:
@@ -74,12 +75,13 @@ def evaluation(dataloader_test, generator, calibration_net, discriminator, args,
 
                 if args.dataset == "LIDC":
                     if not args.generator == "EmptyGenerator":
-                        ged, _, d_YS, d_SS = compute_ged(pred_dist, gt_dist, calnet_preds, args=args, g_input = images, n_samples=args.n_generator_samples_test)
+                        ged, _, d_YS, d_SS, h_scores = compute_ged(pred_dist, gt_dist, calnet_preds, args=args, g_input = images, n_samples=args.n_generator_samples_test, return_hungarian=True)
                         avg_GED.append(ged.mean())
                         avgYS.append(d_YS)
                         avgSS.append(d_SS)
+                        avgHungarian.append(nanmean(h_scores))
 
-                        print(f"\nGED_batch_{i} = {ged.mean().item()}")
+                        print(f"\nGED_batch_{i} = {ged.mean().item()}, Hungarian = {nanmean(h_scores)}")
 
                 if args.dataset == "CITYSCAPES19" and args.class_flip:
                     if instance_checker(generator, GeneralVAE):
@@ -114,6 +116,7 @@ def evaluation(dataloader_test, generator, calibration_net, discriminator, args,
         avgSS = torch.stack(avgSS, dim=0).mean(0)
         mYS = nanmean(avgYS)
         mSS = nanmean(avgSS)
+        if args.dataset == "LIDC": mHungarian = np.mean(avgHungarian)
 
         if (args.dataset == "CAMVID" or args.dataset == "CITYSCAPES19") and args.class_flip:
 
@@ -137,12 +140,15 @@ def evaluation(dataloader_test, generator, calibration_net, discriminator, args,
 
             wandb.log({"meanSS": mSS.cpu()})
 
+            if args.dataset == "LIDC":
+                wandb.log({"hungarian": mHungarian})
 
         if print_stats:
             print("\n---------------------------------------------")
             print("\nmGED = ", mGED)
             print("\nmYS = ", mYS)
             print("\nmSS = ", mSS)
+            if args.dataset == "LIDC": print("\nmHungarian = ", mHungarian)
 
             if args.dataset == "CITYSCAPES19" and args.class_flip:
 

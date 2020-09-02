@@ -9,6 +9,7 @@ from models.generators.GeneralVAE import GeneralVAE
 from utils.constants import *
 from pathlib import Path
 import sklearn.metrics as metrics
+import scipy
 
 """
 Note: Many functions used here are adapted from the Probabilistic U-Net re-implementation repository at https://github.com/SimonKohl/probabilistic_unet
@@ -253,6 +254,14 @@ def compute_ged(pred_dist, gt_dist, calnet_preds, args, g_input = None, n_sample
         # convert labels from discrete to 1-hot format and move channel dimension
         lab_dist = torch.eye(LABELS_CHANNELS)[(gt_dist).long()].permute(1,0,4,2,3).to(DEVICE)
 
+        # todo if eval hungarian
+        # duplicate gt labels as many times as it is needed so that the number of elements in
+        # the predictive distribution and gt distribution are equal
+        if return_hungarian and len(lab_dist)!=args.n_generator_samples_test:
+            orig_n_labels = len(lab_dist)
+            n_repeats = args.n_generator_samples_test//len(lab_dist)
+            lab_dist = lab_dist.repeat(n_repeats,1,1,1,1)
+            assert len(lab_dist)==args.n_generator_samples_test, f"Lab dist ({len(lab_dist)}) and pred samples ({args.n_generator_samples_test}) need to be the same number to compute the hungarian-matched iou. "
 
     elif args.dataset == "CITYSCAPES19":
 
@@ -263,10 +272,20 @@ def compute_ged(pred_dist, gt_dist, calnet_preds, args, g_input = None, n_sample
         probs = eval(f"CITYSCAPES19_{args.flip_experiment}FLIP")[2]
 
     d_matrices = {'YS': [], 'SS': [], 'YY': []}
+    if return_hungarian: hungarian_scores = [] # initialize variable
 
     # aggregate results
     for i in range(lab_dist.shape[1]):
         d_matrix = get_energy_distance_components(lab_dist[:,i,:,:,:], pred_dist[:,i,:,:,:], class_idxs=eval_class_idxs, n_labels = orig_n_labels, args=args)
+
+        if return_hungarian:
+            assert len(lab_dist)==args.n_generator_samples_test, f"Lab dist ({len(lab_dist)}) and pred samples ({args.n_generator_samples_test}) need to be the same number to compute the hungarian-matched iou. "
+
+            # compute Hungarian-matched IoU
+            cost_matrix = nanmean(d_matrix['YS'], dim=-1)
+            h_score = (1-cost_matrix)[scipy.optimize.linear_sum_assignment(cost_matrix.cpu().numpy())].mean()
+            hungarian_scores.append(h_score.item())
+            d_matrix['YS'] = d_matrix['YS'][:orig_n_labels] # remove duplicates for GED computation
 
         for key in d_matrices.keys():
             d_matrices[key].append(d_matrix[key])
@@ -276,7 +295,10 @@ def compute_ged(pred_dist, gt_dist, calnet_preds, args, g_input = None, n_sample
 
     ged, d_YS, d_SS = calc_energy_distances(d_matrices, flip_probs = probs)
 
-    return ged, d_matrices, d_YS, d_SS
+    if return_hungarian:
+        return ged, d_matrices, d_YS, d_SS, torch.tensor(hungarian_scores)
+    else:
+        return ged, d_matrices, d_YS, d_SS
 
 
 @torch.no_grad()
@@ -314,19 +336,18 @@ def compute_stats(args, generator, images, calnet_preds, calnet_labelled_imgs, f
 
     if args.dataset == "LIDC":
         if not args.generator == "EmptyGenerator":
-            ged, _, d_YS, d_SS = compute_ged(pred_dist, gt_dist, calnet_preds, args=args, n_samples=args.n_generator_samples_test)
+            ged, _, d_YS, d_SS, h_scores = compute_ged(pred_dist, gt_dist, calnet_preds, args=args, n_samples=args.n_generator_samples_test, return_hungarian=True)
 
             ged = ged.mean()
             d_YS = d_YS.mean()
             d_SS = d_SS.mean()
+            h_scores = nanmean(h_scores)
 
             if not args.debug and args.mode == "train":
                 wandb.log({"meanGED": ged.cpu()})  # todo make sure GED is correct!
-
                 wandb.log({"meanYS": d_YS.cpu()})
-
                 wandb.log({"meanSS": d_SS.cpu()})
-
+                if args.dataset == "LIDC": wandb.log({"hungarian": h_scores})
 
     if args.dataset == "CITYSCAPES19":
 
@@ -358,11 +379,9 @@ def compute_stats(args, generator, images, calnet_preds, calnet_labelled_imgs, f
         if not args.debug and args.mode == "train":
             if args.generator == "EmptyGenerator":
                 wandb.log({"calnet_precision": calnet_precision.cpu()})  # todo make sure GED is correct!
-
                 wandb.log({"calnet_flip_precision": calnet_flip_precision.cpu()})
             else:
                 wandb.log({"gen_precision": gen_precision.cpu()})  # todo make sure GED is correct!
-
                 wandb.log({"gen_flip_precision": gen_flip_precision.cpu()})
 
         if instance_checker(generator, GeneralVAE):
