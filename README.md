@@ -137,7 +137,7 @@ If you use this code for your research, please cite our paper <a href="https://a
 
 ```
 @article{kassapis2020calibrated,
-    title={{Calibrated Adversarial Refinement for Multimodal Semnatic Segmentation}},
+    title={{Calibrated Adversarial Refinement for Multimodal Semantic Segmentation}},
     author={Kassapis, Elias and Dikov, Georgi and Gupta, Deepak K. and Nugteren, Cedric},
     journal={arXiv preprint arXiv:2006.13144},
     year={2020}
