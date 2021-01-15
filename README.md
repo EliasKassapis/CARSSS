@@ -1,13 +1,13 @@
-# Calibrated Adversarial Refinement for Multimodal Semantic Segmentation
+# Calibrated Adversarial Refinement for Stochastic Semantic Segmentation
 
-PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Multimodal Semantic Segmentation</a>. An overview of the model architecture is depicted below, with ambiguous boundary segmentation 
+PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a>. An overview of the model architecture is depicted below, with ambiguous boundary segmentation 
 as a use case.
 
 <p align="center">
  <img src="images/model_overview.jpg" height="225" alt="image"/>
 </p>
  
-Results on a multimodal Cityscapes dataset are shown below. The leftmost column illustrates input images overlaid with ground truth labels, the middle section shows 8 randomly sampled predictions from the refinement network, and the final column shows aleatoric uncertainty maps extracted from the calibration network.
+Results on a stochastic Cityscapes dataset are shown below. The leftmost column illustrates input images overlaid with ground truth labels, the middle section shows 8 randomly sampled predictions from the refinement network, and the final column shows aleatoric uncertainty maps extracted from the calibration network.
 
 <img src="images/overlaid_labels.jpg" height="180" alt="image"/> <img src="images/samples.jpg" height="180" alt="image"/> <img src="images/aleatoric.jpg" height="180" alt="image"/>
 
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 For the 1D regression dataset experiments, please refer to 
 [this](https://github.com/gdikov/calibrated-adversarial-learning)
-repository. Information on how to obtain the multimodal semantic segmentation datasets can be found below.
+repository. Information on how to obtain the stochastic semantic segmentation datasets can be found below.
 
 ### Download the LIDC dataset
 
