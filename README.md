@@ -23,8 +23,8 @@ This was tested an Ubuntu 18.04 system, on a single 16GB Tesla V100 GPU, but mig
 ### Setup virtual environment
 To install the requirements for this code run:
 ```
-python3 -m venv ~/carmss_venv
-source ~/carmss_venv/bin/activate
+python3 -m venv ~/carsss_venv
+source ~/carsss_venv/bin/activate
 pip install -r requirements.txt
 ```
 
