@@ -133,11 +133,11 @@ python main.py --mode test --test_model_date CS --test_model_suffix CS_CAR_Model
 ```
 
 ## Citation
-If you use this code for your research, please cite our paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Multimodal Semantic Segmentation</a>:
+If you use this code for your research, please cite our paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a>:
 
 ```
 @article{kassapis2020calibrated,
-    title={{Calibrated Adversarial Refinement for Multimodal Semantic Segmentation}},
+    title={{Calibrated Adversarial Refinement for Stochastic Semantic Segmentation}},
     author={Kassapis, Elias and Dikov, Georgi and Gupta, Deepak K. and Nugteren, Cedric},
     journal={arXiv preprint arXiv:2006.13144},
     year={2020}
