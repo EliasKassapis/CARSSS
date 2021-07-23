@@ -123,6 +123,7 @@ def main(args):
         # define loss functions
         if (not args.loss_gen == TOTAL_G_LOSS):
             print(f"{PRINTCOLOR_RED} WARNING: running with one generator-loss only: {args.loss_gen} {PRINTCOLOR_END}")
+
         weights_loss_functions = get_loss_weights(args)
         loss_gen = find_model(LOSS_DIR, TOTAL_G_LOSS, **weights_loss_functions)
         loss_dis = find_model(LOSS_DIR, TOTAL_D_LOSS, **weights_loss_functions)
@@ -211,12 +212,12 @@ def parse():
     parser.add_argument('--DiscDAccCap', default=0.85, type=float, help="cap the discriminator accuracy at input value")
 
 
-    # Test arguments -------------False-----------------------------------------------------------------------------------------------
+    # Test arguments ----------------------------------------------------------------------------------------------------------------
     parser.add_argument('--test_model_date', default="LIDC", type=str, help='date_stamp string for which model to load')
     parser.add_argument('--test_model_suffix', default="LIDC_CAR_Model", type=str, help='filename string for which model to load')
     parser.add_argument('--test_models_to_load', type=list, default=["calibration_net", "generator"])
 
-    # Model arguments -----------------------------------------------------------------------------------------------------------
+    # Model arguments ---------------------------------------------------------------------------------------------------------------
     parser.add_argument('--calibration_net', default="SegNetCalNet", type=str, help="name of objectclass")
     parser.add_argument('--generator', default="UNetGenerator", type=str, help="name of objectclass")
     parser.add_argument('--discriminator', default="PixelDiscriminator", type=str, help="name of objectclass")
@@ -230,7 +231,7 @@ def parse():
     parser.add_argument('--temperature', type=torch.Tensor, default=torch.ones(LABELS_CHANNELS), help='specifies the magnitute of temperature scaling for the calibration net during test-time')
     parser.add_argument('--dropout', type=bool, default=False, help='specifies whether to use dropout')
 
-    # Loss arguments -------------------------------------------------------------------------------------------------------------------
+    # Loss arguments ----------------------------------------------------------------------------------------------------------------
     parser.add_argument('--loss_gen', default=TOTAL_G_LOSS, type=str, help="Overwrites hyperparams generatorloss if not total")
     parser.add_argument('--loss_dis', default=TOTAL_D_LOSS, type=str, help="name of objectclass")
 
@@ -245,7 +246,7 @@ def parse():
 
     parser.add_argument('--n_cal_samples', default=5, type=float, help="Number of samples to use for prediction average in cal loss")
 
-    # hyperparams for Discriminatorloss
+    # hyperparams for Discriminator loss
     parser.add_argument('--DefaultDLoss_weight', default= 1, type=float, help="weight hyperparameter for specific discriminatorloss")
     parser.add_argument('--label_smoothing', default=False, type=bool, help="specifies whether to use label smoothing or not")
 
@@ -254,7 +255,7 @@ def parse():
     parser.add_argument('--batch-size-plotting', type=int, default=5, help='Size of validation batch')
     parser.add_argument('--dataset', type=str, default='LIDC', help='LIDC, CITYSCAPES19 or CITYSCAPES35')
     parser.add_argument('--class_flip', type=bool, default=False, help="Specifies whether to randomly flip classes in CITYSCAPES")
-    parser.add_argument('--flip_experiment', type = str, default = 'DEEP', help = "ROAD or DEEP") # flip only road or 5 classes flipped in the ProbabilistcUNet paper
+    parser.add_argument('--flip_experiment', type = str, default = 'DEEP', help = "ROAD or DEEP") # flip only road or the 5 classes flipped in the ProbabilistcUNet paper
     parser.add_argument('--crop', type=bool, default=True, help='Specifies whether to randomly crop dataset image or not')
     parser.add_argument('--resize', type=bool, default=True, help='Specifies whether to resize dataset image size or not')
     parser.add_argument('--noise', type=bool, default=False, help='Specifies whether to add random noise to labels')

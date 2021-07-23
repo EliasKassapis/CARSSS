@@ -59,7 +59,8 @@ class Noise_injector(nn.Module):
     def __init__(self, n_hidden, z_dim, num_channels, n_channels_out, device="cpu"):
 
         super(Noise_injector, self).__init__()
-        self.num_channels = num_channels #output channels
+
+        self.num_channels = num_channels
         self.n_channels_out = n_channels_out
         self.n_hidden = n_hidden
         self.z_dim = z_dim
@@ -75,12 +76,7 @@ class Noise_injector(nn.Module):
         self.last_layer.apply(init_weights_orthogonal_normal)
 
     def forward(self, feature_map, z):
-        """
-        Z is B x Z_dim and feature_map is B x C x H x W.
-        So broadcast Z to batch_sizexlatent_dimxHxW. Behavior is exactly the same as tf.tile (verified)
-        """
 
-        # affine transf
         residual = self.residual(z).view(z.shape[0], self.n_hidden, 1, 1)
         scale = self.scale(z).view(z.shape[0], self.n_hidden, 1, 1)
 

@@ -114,7 +114,7 @@ class TrainingProcess:
         images, labels = unpack_batch(batch)
 
         if self.args.dataset == "CITYSCAPES19":
-            unlabelled_idxs = torch.where(labels.argmax(1)==24) # get indexes of unlabelled pixels
+            unlabelled_idxs = torch.where(labels.argmax(1)==24) # get indices of unlabelled pixels
         else:
             unlabelled_idxs = None
 

@@ -5,6 +5,7 @@
 *lidc_crops_test/
 *lidc_crops_train/
 *lidc_crops_val/
+data/datasets/lidc/*
 */output
 */wandb/
 */wandb

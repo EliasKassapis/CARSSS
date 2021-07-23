@@ -51,7 +51,7 @@ class UNetGenerator(GeneralVAE):
 
     def decode(self, z, ign_idxs=None):
         up1 = self.dec0(self.down4)
-        up2 = self.dec1(torch.cat((up1, self.down3),dim=1)) #skip connection
+        up2 = self.dec1(torch.cat((up1, self.down3),dim=1)) # skip connection
 
         up2b = nn.functional.leaky_relu(self.zres1(up2, z)) # noise injection
 
@@ -69,7 +69,7 @@ class UNetGenerator(GeneralVAE):
             return out
         else:
             # set unlabelled pixels to class unlabelled for Cityscapes
-            # masks the adv loss by preventing gradients from being formed in unlabelled pixs
+            # masks the adv loss by preventing gradients from being formed in unlabelled pixels
             w = torch.ones(out.shape)
             w[ign_idxs[0], :, ign_idxs[1], ign_idxs[2]] = 0.
 
