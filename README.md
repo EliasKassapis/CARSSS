@@ -1,15 +1,19 @@
 # Calibrated Adversarial Refinement for Stochastic Semantic Segmentation
+[![Python 3.7](https://img.shields.io/badge/Python-3.7-3776AB.svg?logo=python)](https://www.python.org/) [![PyTorch 1.4](https://img.shields.io/badge/PyTorch-1.4-EE4C2C.svg?logo=pytorch)](https://pytorch.org/docs/1.4.0/) [![Apache](https://img.shields.io/badge/License-Apache-3DA639.svg?logo=open-source-initiative)](LICENSE)
 
-PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a>. An overview of the model architecture is depicted below, with ambiguous boundary segmentation 
-as a use case.
+Official PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a> accepted at ICCV2021. An overview of the model architecture is depicted below. We show ambiguous boundary segmentation as a use case, where blue and red pixels in the input image are separable by different vertical boundaries, resulting in multiple valid labels.
 
 <p align="center">
- <img src="images/model_overview.jpg" height="225" alt="image"/>
+ <img src="images/model_overview.jpg" height="250" alt="image"/>
 </p>
  
-Results on a stochastic Cityscapes dataset are shown below. The leftmost column illustrates input images overlaid with ground truth labels, the middle section shows 8 randomly sampled predictions from the refinement network, and the final column shows aleatoric uncertainty maps extracted from the calibration network.
+Results on the stochastic version of the Cityscapes dataset are shown below. The leftmost column illustrates input images overlaid with ground truth labels, the middle section shows 8 randomly sampled predictions from the refinement network, and the final column shows aleatoric uncertainty maps extracted from the calibration network.
 
-<img src="images/overlaid_labels.jpg" height="180" alt="image"/> <img src="images/samples.jpg" height="180" alt="image"/> <img src="images/aleatoric.jpg" height="180" alt="image"/>
+<p align="center">
+ <img src="images/overlaid_labels.jpg" height="175" alt="image"/> <img src="images/samples.jpg" height="175" alt="image"/> <img src="images/aleatoric.jpg" height="175" alt="image"/>
+</p>
+
+The code reproducing the illustrative toy regression example presented in Section 5.1. of the paper can be found in<a href="https://github.com/gdikov/calibrated-adversarial-learning"> this</a> repository.
 
 ## Getting Started
 
@@ -76,7 +80,7 @@ Please note that the official repository of the
 
 ### Download the pre-processed Cityscapes dataset with the black-box predictions
 
-As described in our paper, we integrate our model on top of a black-box segmentation network. We used a pre-trained *DeepLabV3+(Xception65+ASPP)* model publically available 
+As described in our paper, we integrate our model on top of a black-box segmentation network. We used a pre-trained *DeepLabV3+(Xception65+ASPP)* model publicly available 
 [here](https://github.com/nyoki-mtl/pytorch-segmentation)
 . We found that this model obtains a mIoU score of 0.79 on the official test-set of the Cityscapes dataset
 ([Cityscapes](https://www.cityscapes-dataset.com/)).
