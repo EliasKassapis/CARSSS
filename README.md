@@ -1,7 +1,7 @@
 # Calibrated Adversarial Refinement for Stochastic Semantic Segmentation
 [![Python 3.7](https://img.shields.io/badge/Python-3.7-3776AB.svg?logo=python)](https://www.python.org/) [![PyTorch 1.4](https://img.shields.io/badge/PyTorch-1.4-EE4C2C.svg?logo=pytorch)](https://pytorch.org/docs/1.4.0/) [![Apache](https://img.shields.io/badge/License-Apache-3DA639.svg?logo=open-source-initiative)](LICENSE)
 
-Official PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a> accepted at ICCV2021. An overview of the model architecture is depicted below. We show ambiguous boundary segmentation as a use case, where blue and red pixels in the input image are separable by different vertical boundaries, resulting in multiple valid labels.
+Official PyTorch implementation of the Calibrated Adversarial Refinement models described in the paper <a href="https://openaccess.thecvf.com/content/ICCV2021/html/Kassapis_Calibrated_Adversarial_Refinement_for_Stochastic_Semantic_Segmentation_ICCV_2021_paper.html"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a> accepted at ICCV2021. An overview of the model architecture is depicted below. We show ambiguous boundary segmentation as a use case, where blue and red pixels in the input image are separable by different vertical boundaries, resulting in multiple valid labels.
 
 <p align="center">
  <img src="images/model_overview.jpg" height="250" alt="image"/>
@@ -137,14 +137,16 @@ python main.py --mode test --test_model_date CS --test_model_suffix CS_CAR_Model
 ```
 
 ## Citation
-If you use this code for your research, please cite our paper <a href="https://arxiv.org/pdf/2006.13144.pdf"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a>:
+If you use this code for your research, please cite our paper <a href="https://openaccess.thecvf.com/content/ICCV2021/html/Kassapis_Calibrated_Adversarial_Refinement_for_Stochastic_Semantic_Segmentation_ICCV_2021_paper.html"> Calibrated Adversarial Refinement for Stochastic Semantic Segmentation</a>:
 
 ```
-@article{kassapis2020calibrated,
-    title={{Calibrated Adversarial Refinement for Stochastic Semantic Segmentation}},
-    author={Kassapis, Elias and Dikov, Georgi and Gupta, Deepak K. and Nugteren, Cedric},
-    journal={arXiv preprint arXiv:2006.13144},
-    year={2020}
+@InProceedings{Kassapis_2021_ICCV,
+    author    = {Kassapis, Elias and Dikov, Georgi and Gupta, Deepak K. and Nugteren, Cedric},
+    title     = {Calibrated Adversarial Refinement for Stochastic Semantic Segmentation},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2021},
+    pages     = {7057-7067}
 }
 ```
 
