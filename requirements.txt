@@ -22,7 +22,7 @@ h5py==2.10.0
 idna==2.9
 imageio==2.8.0
 imgaug==0.4.0
-joblib==0.14.1
+joblib==1.2.0
 kiwisolver==1.1.0
 linecache2==1.0.0
 matplotlib==3.2.0
