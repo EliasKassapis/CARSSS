@@ -1,7 +1,7 @@
 albumentations==0.4.5
 appdirs==1.4.3
 batchgenerators==0.20.1
-certifi==2020.4.5.1
+certifi==2022.12.7
 chardet==3.0.4
 cityscapesScripts==1.4.0
 click==7.1.1
